@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/entrada.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <DIV class="parte1">
+  <div class="gifentrada">
+    <img src="../imagenes/Isotipo_ucv.png" alt="Animación de entrada">
+    <div class="tituloempresa"> <h2> HOOUSE MACHIINE</h2></div>
+  </div>
+ </DIV>
+
+    <!--logearse o registrase -->
+
+<DIV class="parte2">
+
+ <div class="login">
+
+
+      <div class="imagenlogin">
+
+        <h1>BIENVENIDO DE VUELTA</h1>
+
+        <span> Nos alegra que haya puesto su confiansa en nosotros, por eso estamos aqui
+         para brindarle toda la ayuda posible</span>
+
+       <div class="iconossociales">
+        <a href="">faceboock</a>
+        <a href="">tiktok</a>
+        <a href="">youtube</a>
+       </div>
+
+
+       <div class="regresoregister">
+       <h2>Si no tienes una cuenta intenta crear una</h2>
+       <button type="button" id="btn-registrarse">REGISTRARSE →</button>
+       </div>
+
+      </div>
+
+      <div class="contenidologin">
+      <h2>Iniciar Sesión</h2>
+      <form>
+        <div class="fila">
+          <label for="usuario-login">Usuario</label>
+          <input type="text" id="usuario-login" name="usuario-login" required>
+        </div>
+
+        <div class="fila">
+          <label for="password-login">Contraseña</label>
+          <input type="password" id="password-login" name="password-login" required>
+        </div>
+
+            <!-- NUEVA FILA: recordar contraseña -->
+      <div class="recordar">
+        
+         <span> Recordar</span> <span>contraseña</span>
+        <input type="checkbox" id="recordar">
+      </div>
+
+        <div class="fila">
+          <button type="submit">Ingresar</button>
+        </div>
+
+ <div class="extra">
+      <a href="#">¿Olvidaste tu contraseña?</a>
+    </div>
+
+      </form>
+
+      </div>
+
+  </div>
+
+
+
+<div class="registrarse">
+
+
+  <div class="contenidoregistro">
+    <h2>Registrarse</h2>
+      <form>
+        <div class="fila">
+          <label for="nombre">Nombres</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="fila">
+          <label for="apellido">Apellidos</label>
+          <input type="text" id="apellido" name="apellido" required>
+        </div>
+
+        <div class="fila">
+          <label for="email">Correo</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="fila">
+          <label for="usuario-registro">Usuario</label>
+          <input type="text" id="usuario-registro" name="usuario-registro" required>
+        </div>
+
+        <div class="fila">
+          <label for="password-registro">Contraseña</label>
+          <input type="password" id="password-registro" name="password-registro" required>
+        </div>
+
+        <div class="terminos">
+        <input type="checkbox" id="recordar">
+        <a href=""> Acepta nuestros terminos y condiciones</a>
+        </div>
+
+        <div class="fila">
+          <button type="submit">Crear Cuenta</button>
+        </div>
+      </form>
+
+      </div>
+
+      <div class="imagenregister">
+
+<span> CREATE UNA CUENTA</span>  
+       
+       <label for="">para crear tu cuenta ingresa tu correo electronico y recibiras un mensaje 
+        de verificacion</label>
+
+        
+<div class="regresologin">
+  <h2>Si ya tienes una cuenta intenta logearte</h2>
+        <button type="button" id="btn-login">← LOGIN</button>
+
+        </div>
+
+      </div>
+
+
+</div>
+
+
+
+
+</DIV>
+
+
+<script>
+  const loginSection = document.querySelector('.login');
+  const registerSection = document.querySelector('.registrarse');
+
+  const btnIrRegistro = document.getElementById('btn-registrarse');
+  const btnIrLogin = document.getElementById('btn-login');
+
+  // Estado inicial → mostrar login, ocultar registro
+  loginSection.style.opacity = "1";
+  loginSection.style.visibility = "visible";
+  registerSection.style.opacity = "0";
+  registerSection.style.visibility = "hidden";
+
+  // Mostrar registro
+  btnIrRegistro.addEventListener('click', () => {
+    loginSection.style.opacity = "0";
+    loginSection.style.visibility = "hidden";
+
+    registerSection.style.opacity = "1";
+    registerSection.style.visibility = "visible";
+  });
+
+  // Volver al login
+  btnIrLogin.addEventListener('click', () => {
+    registerSection.style.opacity = "0";
+    registerSection.style.visibility = "hidden";
+
+    loginSection.style.opacity = "1";
+    loginSection.style.visibility = "visible";
+  });
+</script>
+
+
+</body>
+</html>

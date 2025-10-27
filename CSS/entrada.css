@@ -1,0 +1,440 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+
+.parte1 {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ background: linear-gradient(
+      to left,
+      rgba(103, 102, 102, 0.75),   /* más oscuro a la izquierda */
+      rgba(188, 186, 186, 0.45)    /* un poco más claro a la derecha */
+    ),
+    url("../imagenes/descarga\ \(4\).jpg") ;
+
+      background-repeat: no-repeat;
+    background-size: cover;
+  transform-origin: right center; /* punto desde donde se cierra a la derecha */
+   animation: cortina-salida 3s ease forwards;
+     animation-delay: 9s; /* Aparece después de 5s */
+z-index: 10;
+}
+
+
+@keyframes cortina-salida {
+  0% {
+    transform: scaleX(1); /* tamaño normal */
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0); /* se encoge hacia el lugar que le indicamos */
+    opacity: 0;
+  }
+}
+
+
+
+.gifentrada {
+  width: 100vw;       /* Ocupa todo el ancho */
+  height: 30vh;       /* Ocupa 40% del alto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   background: rgba(198, 198, 198, 0.05);
+  backdrop-filter: blur(10px);
+  gap: 2%;
+  /* Animación del cuadro */
+  animation: scale-up-horizontal-left 1.5s ease forwards;
+}
+
+.gifentrada h2 {
+
+  font-size: 50px;
+  color: #000000;
+}
+
+
+@keyframes scale-up-horizontal-left {
+  0% {
+    transform: scaleX(.0);/*aca inicia desde donde lo coloqs*/
+    transform-origin: left center;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+.tituloempresa h2 {
+  display: inline-block;
+  opacity: 0; /* Oculto al inicio */
+  animation: scale-up-horizontal-left 2s ease forwards;
+  animation-delay: 4s; /* Espera 1s antes de iniciar */
+}
+
+@keyframes scale-up-horizontal-left {
+  0% {
+    opacity: 0;                  /* invisible */
+        transform: scaleX(.0);/*aca inicia desde donde lo coloqs*/
+    transform-origin: left center;
+  }
+  100% {
+    opacity: 1;                  /* visible */
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+
+.gifentrada img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+ 
+  display: inline-block;
+
+  opacity: 0; /* Oculto al inicio */
+  animation: fade-in-scale 3s ease forwards;
+  animation-delay: 2s; /* Aparece después de 5s */
+}
+
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+/* ---------------------------------------- Parte 2 ------------------*/
+
+/* Contenedor general */
+/* Para que no se sobrepongan feo */
+.parte2 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+/* Ambas registrase pantallas superpuestas */
+.login, .registrarse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  gap: 0.5%;
+}
+
+.login {
+  background: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.75),   /* más oscuro a la izquierda */
+      rgba(0, 0, 0, 0.45)    /* un poco más claro a la derecha */
+    ),
+    url("../imagenes/fon.jpg") no-repeat center center/cover;
+}
+
+.login , .registrarse {
+  opacity: 1;
+  visibility: visible;
+  z-index: 3;
+}
+
+/* Formulario login */
+.contenidologin {
+  width: 50%;
+  max-width: 400px;   /* evita que sea muy ancho */
+  margin-left: 60px;      /* 👈 lo empuja a la izquierda en vez de centrar */
+  text-align: left;       /* 👈 todo alineado a la izquierda */
+  padding: 50px;
+  background: rgba(0, 0, 0, 0.55); /* caja semitransparente */
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* Título */
+.contenidologin h2 {
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 24px;
+}
+
+/* Campos */
+.contenidologin .fila {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.contenidologin label{
+  color: #ffffff;
+  display:flex ;
+  flex-direction: row;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.contenidologin input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+
+.contenidologin .recordar {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  width: 40%;
+  gap: 8px;         /* espacio entre casilla y texto */
+  margin: 10px 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.contenidologin .recordar span {
+  font-size: 15px;
+}
+
+
+/* Botón */
+.fila button {
+  width: auto;             /* 👈 ya no ocupa todo el ancho */
+  padding: 10px 18px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block;
+  margin-top: 10px;
+  margin-left: 0;          /* 👈 pegado a la izquierda */
+}
+
+.contenidologin button:hover {
+  background: #2980b9;
+}
+
+/* Enlace de recordar contraseña */
+.contenidologin .extra {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.contenidologin .extra a {
+  color: #ddd;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.contenidologin .extra a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+.imagenlogin {
+  margin-left: 10%;
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centra vertical */
+  align-items: flex-start;   /* 👈 ahora todo a la izquierda */
+  padding: 40px;
+  color: #fff;
+  text-align: left;          /* 👈 texto alineado a la izquierda */
+}
+
+
+.imagenlogin h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.imagenlogin span {
+  max-width: 80%;
+  line-height: 1.6;
+  font-size: 20px;
+  margin-bottom: 5%;
+  
+}
+
+.iconossociales {
+  margin-top: 20px;
+}
+
+.iconossociales a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.iconossociales a:hover {
+  text-decoration: underline;
+}
+.regresoregister {
+  margin-top: 15%;
+}
+
+.regresoregister button {
+   background: rgba(73, 121, 136, 0.378);
+  backdrop-filter: blur(10px);
+  padding: 20px 20px;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  
+}
+
+.regresoregister button:hover{
+   background: rgba(180, 193, 197, 0.475);
+  color: #050505;
+}
+
+
+/* ----------------- registro ---*/
+
+.registrarse {
+  gap: 10%;
+ background: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.75),   /* más oscuro a la izquierda */
+      rgba(0, 0, 0, 0.45)    /* un poco más claro a la derecha */
+    ),
+    url("../imagenes/registro.jpg") no-repeat center center/cover;
+}
+
+.contenidoregistro {
+  width: 55%;
+  max-width: 30%;   /* evita que sea muy ancho */
+  height: 70vh;
+  margin-left: 8%;      /* 👈 lo empuja a la izquierda en vez de centrar */
+  text-align: left;       /* 👈 todo alineado a la izquierda */
+  padding: 50px;
+  background: rgba(0, 0, 0, 0.55); /* caja semitransparente */
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.contenidoregistro h2 {
+  color: #fff;
+  font-size: 30px;
+}
+
+/* Casilla dentro del registro */
+.contenidoregistro .terminos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #fff; /* o el color de tu diseño */
+}
+
+.contenidoregistro .terminos label {
+  cursor: pointer;
+}
+
+.contenidoregistro .terminos a {
+  color: #4da3ff;
+  text-decoration: none;
+}
+
+.contenidoregistro .terminos a:hover {
+  text-decoration: underline;
+}
+
+.contenidoregistro form {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.contenidoregistro .fila {
+
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  gap: 2px;
+  color: #ffffff;
+  
+}
+
+.fila input {
+  padding: 10px 0;
+}
+
+
+.imagenregister {
+  width: 35%;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagenregister span{
+color: #ffffff;
+font-size: 60px;
+}
+
+.imagenregister label {
+  color: #5fa3ec;
+  font-size: 20px;
+}
+
+.regresologin {
+margin-top: 20%;
+color: #ddd;
+
+}
+
+.regresologin button {
+   background: rgba(73, 121, 136, 0.378);
+  backdrop-filter: blur(10px);
+  padding: 20px 20px;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.regresologin button:hover {
+   background: rgba(180, 193, 197, 0.475);
+  color: #050505;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House/M - Control de Hogar Inteligente</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../CSS/inicio.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <!-- --------------parte 1 --------------------- -->
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="inicio.html" class="logo-link">
+        <i class="fas fa-home"></i>
+        <h1>House/M</h1>
+      </a>
+    </div>
+    
+    <nav class="main-nav">
+      <a href="#" class="active"><i class="fas fa-shield-alt"></i> Seguridad</a>
+      <a href="#"><i class="fas fa-tv"></i> Ajustes</a>
+      <a href="#"><i class="fas fa-clipboard-check"></i> Auditoría</a>
+    </nav>
+    
+    <div class="user-actions">
+      <a href="#" class="user-icon"><i class="fas fa-user"></i></a>
+      <a href="#" class="notification-icon"><i class="fas fa-bell"></i></a>
+      <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+  </header>
+
+
+  
+
+    <!-- --------------parte 2 --------------------- -->
+  <div class="sidebar">
+    <div class="category-buttons">
+      <button class="category-btn active" data-category="todos">
+        <i class="fas fa-th-large"></i>
+        <span>Todos</span>
+      </button>
+      <button class="category-btn" data-category="cuartos">
+        <i class="fas fa-bed"></i>
+        <span>Cuartos</span>
+      </button>
+      <button class="category-btn" data-category="otros">
+        <i class="fas fa-ellipsis-h"></i>
+        <span>Otros</span>
+      </button>
+    </div>
+    
+    <div class="room-list">
+      <!-- Sección de Cuartos -->
+      <div class="room-category" id="cuartos-section">
+        <h3>Cuartos</h3>
+        <button class="room-btn" data-room="cuarto">
+          <i class="fas fa-bed"></i>
+          <span>Cuarto</span>
+        </button>
+        <button class="room-btn" data-room="cocina">
+          <i class="fas fa-utensils"></i>
+          <span>Cocina</span>
+        </button>
+        <button class="room-btn" data-room="garaje">
+          <i class="fas fa-car"></i>
+          <span>Garaje</span>
+        </button>
+      </div>
+      
+      <!-- Sección de Otros -->
+      <div class="room-category" id="otros-section">
+        <h3>Otros</h3>
+        <button class="room-btn" data-room="sala">
+          <i class="fas fa-couch"></i>
+          <span>Sala</span>
+        </button>
+        <button class="room-btn" data-room="baño">
+          <i class="fas fa-bath"></i>
+          <span>Baño</span>
+        </button>
+        <button class="room-btn" data-room="afuera">
+          <i class="fas fa-tree"></i>
+          <span>Exterior</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel de acciones -->
+  <div class="actions-panel" id="actionsPanel">
+    <div class="actions-header">
+      <h3 id="roomTitle">Habitación</h3>
+      <button class="close-panel">&times;</button>
+    </div>
+    <div class="actions-content" id="actionsContent">
+      <!-- Las acciones se cargarán dinámicamente aquí -->
+    </div>
+  </div>
+
+  <!-- Contenedor para la imagen principal -->
+  <div class="main-image-container">
+    <!-- Las imágenes se cargarán dinámicamente aquí -->
+    <!-- 
+      IMÁGENES A REEMPLAZAR MÁS ADELANTE:
+      - Para 'todos': img/todos.jpg
+      - Para 'cuartos': img/cuartos.jpg
+      - Para 'otros': img/otros.jpg
+    -->
+  </div>
+
+  <!-- Botón flotante de IA -->
+  <a href="" class="ia-button">
+    <i class="fas fa-robot"></i>
+  </a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  
+  <script src="../JS/inicio.js"></script>
+  
+  
+</body>
+</html>
