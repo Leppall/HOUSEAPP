@@ -1,0 +1,278 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f0f2f5;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+/* Para que el contenido no quede debajo del header */
+.container {
+  padding-top: 120px;
+  width: 90%;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2c3e50;
+  padding: 0 20px;
+  height: 70px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-radius: 20px;
+  width: 94%;
+  margin-top: 0.5%;
+  z-index: 1000;
+
+  box-sizing: border-box;
+}
+
+header h1 {
+  font-size: 20px;
+}
+
+/* Navegación principal */
+header .main-nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+header .main-nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 8px 15px;
+  border-radius: 8px;
+}
+
+header .main-nav a.active {
+  background-color: #3498db;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header .main-nav a:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Estilos para el logo */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+}
+
+.logo-link i {
+  font-size: 1.5rem;
+  margin-right: 0; /* Eliminado el margen derecho */
+}
+
+* Estilos para el logo */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+}
+
+.logo-link i {
+  font-size: 1.5rem;
+  margin-right: 0; /* Eliminado el margen derecho */
+}
+
+
+/* Ajustes para el logo */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+}
+
+.logo-link i {
+  font-size: 1.0rem;
+  margin-right: 5px;
+}
+
+.logo-link:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+/* Forzar que el logo sea blanco y sin subrayado */
+.logo-link,
+.logo-link * {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+
+
+
+/* Perfil usuario */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  color: #ecf0f1;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.user-icon {
+  background: #4a6fa5;
+  border: 2px solid #ecf0f1;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+
+  transition: all 0.2s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.05);
+  background: #3a5a80;
+}
+
+.logout {
+  color: #ecf0f1;
+  font-size: 1.2rem;
+  padding: 8px;
+  border-radius: 50%;
+  transition: 0.2s ease;
+}
+
+.logout:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+
+/* ===========================
+   TABLA DE SOLICITUDES
+=========================== */
+
+.container h2 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+thead {
+  background: #2c3e50;
+  color: white;
+}
+
+thead th {
+  padding: 12px 15px;
+  font-size: 14px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* Texto cuando no hay registros */
+.empty {
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+  color: #7f8c
+}
+/* --- BOTONES GENERALES --- */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+/* --- BOTÓN APROBAR --- */
+.btn.aprobar {
+  background: linear-gradient(135deg, #28d67e, #20b869);
+  box-shadow: 0 4px 10px rgba(32, 184, 105, 0.35);
+}
+
+.btn.aprobar:hover {
+  background: linear-gradient(135deg, #20b869, #1a9b59);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(32, 184, 105, 0.45);
+}
+
+.btn.aprobar:active {
+  transform: scale(0.96);
+}
+
+/* --- BOTÓN RECHAZAR --- */
+.btn.rechazar {
+  background: linear-gradient(135deg, #ff5f58, #e0443c);
+  box-shadow: 0 4px 10px rgba(255, 95, 88, 0.35);
+}
+
+.btn.rechazar:hover {
+  background: linear-gradient(135deg, #e0443c, #c73730);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(255, 95, 88, 0.45);
+}
+
+.btn.rechazar:active {
+  transform: scale(0.96);
+}
+
+/* --- EFECTO AL PASAR SOBRE CUALQUIER BOTÓN --- */
+.btn:hover {
+  filter: brightness(1.05);
+}
+
+/* --- OPCIONAL: ANIMACIÓN DE APARICIÓN --- */
+@keyframes fadeInBtn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn {
+  animation: fadeInBtn 0.4s ease forwards;
+}
