@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Agregar al contenedor
         contentContainer.appendChild(script);
+
+        
     }
     
     // Agregar event listeners a los enlaces de navegación
