@@ -1,11 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  
-
+  font-family: 'Poppins', sans-serif;
 }
 
 .parte1 {
@@ -167,14 +175,17 @@ z-index: 10;
 
 /* Formulario login */
 .contenidologin {
-  width: 50%;
-  max-width: 400px;   /* evita que sea muy ancho */
-  margin-left: 60px;      /* 👈 lo empuja a la izquierda en vez de centrar */
-  text-align: left;       /* 👈 todo alineado a la izquierda */
+  width: 100%;
+  max-width: 500px;   /* evita que sea muy ancho */
+  margin: 40px auto;  /* Centrado horizontalmente */
+  text-align: left;   /* todo alineado a la izquierda */
   padding: 50px;
-  background: rgba(0, 0, 0, 0.55); /* caja semitransparente */
+  background: rgba(0, 0, 0, 0.7); /* caja semitransparente */
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* Título */
@@ -188,57 +199,68 @@ z-index: 10;
 /* Campos */
 .contenidologin .fila {
   margin-bottom: 20px;
-  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
+
 .contenidologin label{
   color: #ffffff;
   display:flex ;
   flex-direction: row;
   margin-bottom: 6px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-.contenidologin input {
+.contenidologin .fila input[type="text"],
+.contenidologin .fila input[type="password"],
+.contenidologin .fila input[type="email"] {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #bbb;
+  padding: 12px 15px;
+  border: 1px solid #444;
   border-radius: 6px;
-  outline: none;
-  transition: border 0.3s;
+  font-size: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
 }
 
+.contenidologin .fila input[type="text"]:focus,
+.contenidologin .fila input[type="password"]:focus,
+.contenidologin .fila input[type="email"]:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+}
 
 .contenidologin .recordar {
   display: flex;
-  flex-direction: row;
-  align-items: end;
-  width: 40%;
-  gap: 8px;         /* espacio entre casilla y texto */
-  margin: 10px 0;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
   font-size: 14px;
   color: #fff;
+  width: 100%;
 }
 
 .contenidologin .recordar span {
   font-size: 15px;
 }
 
-
 /* Botón */
 .fila button {
-  width: auto;             /* 👈 ya no ocupa todo el ancho */
-  padding: 10px 18px;
+  width: 100%;
+  padding: 12px;
   background: #3498db;
   color: white;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
-  display: block;
+  font-size: 16px;
   margin-top: 10px;
-  margin-left: 0;          /* 👈 pegado a la izquierda */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .contenidologin button:hover {
@@ -329,40 +351,73 @@ z-index: 10;
 /* ----------------- registro ---*/
 
 .registrarse {
-  gap: 10%;
- background: linear-gradient(
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
       to left,
-      rgba(0, 0, 0, 0.75),   /* más oscuro a la izquierda */
-      rgba(0, 0, 0, 0.45)    /* un poco más claro a la derecha */
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0.45)
     ),
     url("../imagenes/registro.jpg") no-repeat center center/cover;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  gap: 2%;
 }
 
 .contenidoregistro {
-  width: 55%;
-  max-width: 30%;   /* evita que sea muy ancho */
-  height: 70vh;
-  margin-left: 8%;      /* 👈 lo empuja a la izquierda en vez de centrar */
-  text-align: left;       /* 👈 todo alineado a la izquierda */
-  padding: 50px;
-  background: rgba(0, 0, 0, 0.55); /* caja semitransparente */
+  width: 100%;
+  max-width: 500px;
+  min-height: auto;
+  max-height: 90vh;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3498db rgba(255, 255, 255, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+/* Estilos para la barra de desplazamiento */
+.contenidoregistro::-webkit-scrollbar {
+  width: 5px;
+}
+
+.contenidoregistro::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.contenidoregistro::-webkit-scrollbar-thumb {
+  background-color: #3498db;
+  border-radius: 3px;
 }
 
 .contenidoregistro h2 {
   color: #fff;
-  font-size: 30px;
+  font-size: 28px;
+  margin: 0 0 20px 0;
+  text-align: center;
+  padding-top: 10px;
 }
 
 /* Casilla dentro del registro */
 .contenidoregistro .terminos {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  margin: 15px 0;
   font-size: 14px;
-  color: #fff; /* o el color de tu diseño */
+  color: #fff;
+  width: 100%;
 }
 
 .contenidoregistro .terminos label {
@@ -379,62 +434,111 @@ z-index: 10;
 }
 
 .contenidoregistro form {
-  
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
 }
 
 .contenidoregistro .fila {
-
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
-  gap: 2px;
+  margin-bottom: 15px;
+  gap: 3px;
   color: #ffffff;
-  
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .fila input {
   padding: 10px 0;
 }
 
-
 .imagenregister {
-  width: 35%;
-  margin-right: 10%;
+  margin-left: 10%;
+  width: 40%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  color: #fff;
+  text-align: left;
 }
 
-.imagenregister span{
-color: #ffffff;
-font-size: 60px;
+.imagenregister span {
+  font-size: 60px;
+  margin-bottom: 20px;
+  display: block;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 .imagenregister label {
-  color: #5fa3ec;
-  font-size: 20px;
+  display: block;
+  margin-bottom: 30px;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 90%;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
 }
 
 .regresologin {
-margin-top: 20%;
-color: #ddd;
+  margin-top: 50px;
+  text-align: left;
+  width: 100%;
+}
 
+.regresologin h2 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .regresologin button {
-   background: rgba(73, 121, 136, 0.378);
+  background: rgba(73, 121, 136, 0.6);
   backdrop-filter: blur(10px);
-  padding: 20px 20px;
-  border-radius: 10px;
+  padding: 12px 25px;
+  border-radius: 6px;
   border: none;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
-  margin-top: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .regresologin button:hover {
-   background: rgba(180, 193, 197, 0.475);
-  color: #050505;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mostrar imagenregister en pantallas medianas y grandes */
+@media (min-width: 768px) {
+  .imagenregister {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+  }
+  
+  .registrarse {
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .contenidoregistro {
+    margin: 20px 0;
+  }
 }

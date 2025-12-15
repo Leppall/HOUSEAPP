@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House/M - Control de Hogar Inteligente</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../CSS/auditoria.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+
+    <!-- --------------parte 1 --------------------- -->
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="inicio.html" class="logo-link">
+        <i class="fas fa-home"></i>
+        <h1>House/M</h1>
+      </a>
+    </div>
     
+    <nav class="main-nav">
+      <a href="seguridad.html"><i class="fas fa-shield-alt"></i> Seguridad</a>
+      <a href="ajustes.html"><i class="fas fa-tv"></i> Ajustes</a>
+      <a href="auditoria.html" class="active"><i class="fas fa-clipboard-check"></i> Auditoría</a>
+    </nav>
+    
+    <div class="user-actions">
+      <div class="user-profile">
+        <span class="username">Usuario</span>
+        <button class="user-icon">
+          <i class="fas fa-user"></i>
+        </button>
+      </div>
+      <a href="#" class="logout" title="Cerrar sesión"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+  </header>
+
+
+    <!-- Botón flotante de IA -->
+  <a href="iahogar.html" class="ia-button">
+    <i class="fas fa-robot"></i>
+  </a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  
+  <script src="../JS/inicio.js"></script>
+  
+
+  
 </body>
 </html>

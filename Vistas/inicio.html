@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="../CSS/inicio.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="../JS/inicio.js"></script>
 </head>
 <body>
 
@@ -22,18 +23,27 @@
     </div>
     
     <nav class="main-nav">
-      <a href="#" class="active"><i class="fas fa-shield-alt"></i> Seguridad</a>
-      <a href="#"><i class="fas fa-tv"></i> Ajustes</a>
-      <a href="#"><i class="fas fa-clipboard-check"></i> Auditoría</a>
+      <a href="seguridad.html" class="active"><i class="fas fa-shield-alt"></i> Seguridad</a>
+      <a href="ajustes.html"><i class="fas fa-tv"></i> Ajustes</a>
+      <a href="auditoria.html"><i class="fas fa-clipboard-check"></i> Auditoría</a>
     </nav>
     
     <div class="user-actions">
-      <a href="#" class="user-icon"><i class="fas fa-user"></i></a>
-      <a href="#" class="notification-icon"><i class="fas fa-bell"></i></a>
-      <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+      <div class="user-profile">
+        <span id="nombre-usuario" class="username">Usuario</span>
+        <a href="panelusuario.html" class="user-icon">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+      <a href="#" id="logout-btn" class="logout" title="Cerrar sesión"><i class="fas fa-sign-out-alt"></i></a>
     </div>
   </header>
 
+
+   <!-- Botón flotante de IA -->
+  <a href="iahogar.html" class="ia-button">
+    <i class="fas fa-robot"></i>
+  </a>
 
   
 
@@ -113,13 +123,10 @@
     -->
   </div>
 
-  <!-- Botón flotante de IA -->
-  <a href="" class="ia-button">
-    <i class="fas fa-robot"></i>
-  </a>
+ 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-  
+  <script type="module" src="../INDEX.js"></script>
   <script src="../JS/inicio.js"></script>
   
   

@@ -1,5 +1,39 @@
 
-    // Función para actualizar la imagen según la categoría
+// Importar funciones de autenticación
+import { isUserLoggedIn, logout, getCurrentUser } from './auth.js';
+
+// Función para actualizar la interfaz de usuario con la información del usuario
+function updateUserUI() {
+    const user = getCurrentUser();
+    if (user) {
+        const usernameElement = document.getElementById('nombre-usuario');
+        if (usernameElement) {
+            usernameElement.textContent = user.nombre || user.nombre_usuario || 'Usuario';
+        }
+    }
+}
+
+// Verificar autenticación al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    if (!isUserLoggedIn()) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Actualizar la interfaz de usuario con la información del usuario
+    updateUserUI();
+    
+    // Configurar botón de cerrar sesión
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+    }
+});
+
+// Función para actualizar la imagen según la categoría
     function updateMainImage(category) {
       const container = document.querySelector('.main-image-container');
       let imageUrl = '';
@@ -223,3 +257,52 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.category-btn[data-category="todos"]')?.click();
 });
  
+
+
+
+
+// Detectar sesión de Google -----------------
+document.addEventListener('DOMContentLoaded', async () => {
+  const { data: { session }, error } = await supabase.auth.getSession();
+
+  if (session) {
+    const user = session.user;
+    console.log('Usuario autenticado con Google:', user);
+    localStorage.setItem('usuarioActual', JSON.stringify(user));
+
+    // Mostrar nombre en pantalla si quieres
+    const nombre = user.user_metadata.full_name || user.email;
+    document.getElementById('nombre-usuario').textContent = nombre;
+  } else {
+    console.log('No hay sesión activa.');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // --- Inicializar Supabase ---
+  const supabaseUrl = "https://qvxfwuxfcvjxmawvzioe.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2eGZ3dXhmY3ZqeG1hd3Z6aW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTM2MDUsImV4cCI6MjA3NzkyOTYwNX0.stfGausY-BLG_SA8RBiVo4KJYh2fjcXeEpOL6_cJ5nE";
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  // --- Verificar sesión (Google o local) ---
+  const { data: { session }, error } = await supabase.auth.getSession();
+  let nombreUsuario = 'Usuario';
+
+  if (session?.user) {
+    const user = session.user;
+    nombreUsuario = user.user_metadata?.full_name || user.email;
+    localStorage.setItem('usuarioActual', JSON.stringify(user));
+  } else {
+    const usuarioLocal = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (usuarioLocal) {
+      nombreUsuario = usuarioLocal.nombre || usuarioLocal.nombre_usuario || usuarioLocal.correo || 'Usuario';
+    }
+  }
+
+  // 🔹 Mostrar nombre en pantalla
+  const nombreElemento = document.getElementById('nombre-usuario');
+  if (nombreElemento) nombreElemento.textContent = nombreUsuario;
+
+  console.log('Nombre mostrado:', nombreUsuario);
+});
+
