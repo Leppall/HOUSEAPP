@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="perfil-container">
+    <div class="perfil-header">
+        <div class="perfil-avatar">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <h2 id="nombre-completo">Cargando...</h2>
+        <p id="correo-usuario">Cargando...</p>
+    </div>
+    
+    <div class="perfil-datos">
+
+        <div class="dato-item">
+            <div class="dato-icono">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="dato-contenido">
+                <h4>Nombre de Usuario</h4>
+                <p id="username-field">---</p>
+            </div>
+        </div>
+
+        <div class="dato-item">
+            <div class="dato-icono">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="dato-contenido">
+                <h4>Correo Electrónico</h4>
+                <p id="email-field">---</p>
+            </div>
+        </div>
+
+        <div class="dato-item">
+            <div class="dato-icono">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="dato-contenido">
+                <h4>Rol</h4>
+                <p id="rol-field">---</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="perfil-acciones">
+        <button class="btn-editar">
+            <i class="fas fa-edit"></i> Editar Perfil
+        </button>
+    </div>
+</div>
+
+<script src="../JS/perfil.js"></script>
+</body>
+</html>

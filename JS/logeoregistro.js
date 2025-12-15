@@ -73,11 +73,19 @@ formLogin.addEventListener('submit', async (e) => {
   }
 
   // Guardar sesión
-  localStorage.setItem('usuarioActual', JSON.stringify(data));
-  alert(`✅ Bienvenido, ${data.nombre}!`);
+  // 🔐 Guardar sesión (completo)
+localStorage.setItem('usuarioActual', JSON.stringify(data));
 
-  // Redirigir a inicio.html para todos
-  window.location.href = 'contenido.html';
+// 🔑 Guardar datos CLAVE para el sistema
+localStorage.setItem('usuario_id', data.id);
+localStorage.setItem('usuario_nombre', data.nombre_usuario);
+
+// Mensaje
+alert(`✅ Bienvenido, ${data.nombre}!`);
+
+// Redirigir al sistema
+window.location.href = 'contenido.html';
+
 });
 
 
@@ -112,9 +120,10 @@ async function handleGoogleAuth() {
 
   // Guardar los datos del usuario en localStorage
   localStorage.setItem('usuarioActual', JSON.stringify(userData));
-  
-  // Redirigir a la página de contenido
-  window.location.href = 'contenido.html';
+localStorage.setItem("usuario_id", userData.id);
+localStorage.setItem("usuario_nombre", userData.nombre_usuario);
+window.location.href = 'contenido.html';
+
 }
 
 // Verificar la autenticación al cargar la página

@@ -1,4 +1,41 @@
-// Sistema de navegación dinámica para cargar contenido
+const supabaseUrl = "https://qvxfwuxfcvjxmawvzioe.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2eGZ3dXhmY3ZqeG1hd3Z6aW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTM2MDUsImV4cCI6MjA3NzkyOTYwNX0.stfGausY-BLG_SA8RBiVo4KJYh2fjcXeEpOL6_cJ5nE";
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+
+
+// 🔥 Cargar usuario logeado en el header
+async function cargarUsuarioHeader() {
+    const userId = localStorage.getItem("usuario_id");
+
+    if (!userId) {
+        // Si no hay sesión → redirigir a login
+        window.location.href = "entradalogeo.html";
+        return;
+    }
+
+    const { data, error } = await supabase
+        .from("usuarios")
+        .select("nombre, nombre_usuario")
+        .eq("id", userId)
+        .single();
+
+    if (error) {
+        console.error("Error cargando usuario:", error.message);
+        return;
+    }
+
+    // 👉 Mostrar nombre en el header
+    document.getElementById("nombre-usuario").textContent = data.nombre_usuario;
+    
+}
+
+// Ejecutar al cargar la página
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener el contenedor donde se cargará el contenido
     const contentContainer = document.querySelector('.CLASES');
@@ -8,9 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Configuración de rutas
     const routes = {
+         'inicio': 'inicio.html',
         'seguridad': 'seguridad.html',
         'ajustes': 'ajustes.html',
-        'auditoría': 'auditoria.html'
+        'auditoría': 'auditoria.html',
+        'perfil': 'perfil.html'
     };
     
     // Función para cargar contenido dinámicamente
@@ -60,7 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if ((page === 'seguridad.html' && linkText === 'seguridad') ||
                 (page === 'ajustes.html' && linkText === 'ajustes') ||
-                (page === 'auditoria.html' && linkText === 'auditoría')) {
+                (page === 'auditoria.html' && linkText === 'auditoría')||
+                (page === 'perfil.html' && linkText === 'perfil')
+            ) {
                 link.classList.add('active');
             }
         });
@@ -135,9 +176,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cargar la página inicial
     loadInitialPage();
     
+    // Agregar event listener para el botón de perfil
+    const perfilBtn = document.getElementById('btn-perfil');
+    if (perfilBtn) {
+        perfilBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loadContent('perfil.html');
+            history.pushState({page: 'perfil.html'}, '', '#perfil.html');
+            
+            // Quitar clase active de todos los enlaces de navegación
+            navLinks.forEach(link => link.classList.remove('active'));
+        });
+    }
+    
     // Exponer la función loadContent globalmente para uso externo
     window.loadPage = loadContent;
+
+    cargarUsuarioHeader();
 });
 
 
 
+// cerrar seccion
+
+document.getElementById("logout-btn").addEventListener("click", () => {
+    localStorage.clear();
+    window.location.href = "entradalogeo.html";
+});
