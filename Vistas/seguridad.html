@@ -1,44 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>House/M - Control de Hogar Inteligente</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
- <link rel="stylesheet" href="../CSS/seguridad.css">
- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
- <script type="module" src="../JS/inicio.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House/M - Control de Hogar Inteligente</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../CSS/seguridad.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Estilo rápido para que se vea bien la tabla */
+    body { font-family: 'Poppins', sans-serif; background: #f4f4f4; padding: 20px; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+    button { padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; }
+    .aprobar { background-color: #28a745; color: white; }
+    .rechazar { background-color: #dc3545; color: white; }
+    .empty { text-align: center; color: #555; }
+  </style>
 </head>
-
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <a href="inicio.html" class="logo-link">
-        <i class="fas fa-home"></i>
-        <h1>House/M</h1>
-      </a>
-    </div>
-    
-    <nav class="main-nav">
-      <a href="seguridad.html" class="active"><i class="fas fa-clipboard-check"></i> Seguridad</a>
-      <a href="ajustes.html"><i class="fas fa-tv"></i> Ajustes</a>
-      <a href="auditoria.html"> <i class="fas fa-shield-alt"></i> Auditoría</a>
-    </nav>
-    
-   <div class="user-actions">
-      <div class="user-profile">
-        <span id="nombre-usuario" class="username">Usuario</span>
-        <a href="panelusuario.html" class="user-icon">
-          <i class="fas fa-user"></i>
-        </a>
-      </div>
-      <a href="#" id="logout-btn" class="logout" title="Cerrar sesión"><i class="fas fa-sign-out-alt"></i></a>
-    </div>
-  </header>
-
-  <!-- CONTENIDO -->
   <div class="container">
       <h2>Solicitudes de Registro Pendientes</h2>
 
@@ -51,15 +33,94 @@
                   <th>Acción</th>
               </tr>
           </thead>
-
           <tbody id="tablaSolicitudes">
-            <!-- Aquí JS insertará las solicitudes -->
+            <!-- Aquí se insertarán dinámicamente las solicitudes -->
           </tbody>
       </table>
   </div>
 
-  <!-- JS EXTERNO -->
-  <script type="module" src="../JS/seguridad.js"></script>
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+    // 🔹 Configuración Supabase
+    const supabaseUrl = "https://qvxfwuxfcvjxmawvzioe.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2eGZ3dXhmY3ZqeG1hd3Z6aW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTM2MDUsImV4cCI6MjA3NzkyOTYwNX0.stfGausY-BLG_SA8RBiVo4KJYh2fjcXeEpOL6_cJ5nE";
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const tabla = document.querySelector("#tablaSolicitudes");
+
+    // 🔹 Cargar solicitudes pendientes
+    async function cargarSolicitudes() {
+      const { data, error } = await supabase
+        .from("solicitudes_registro")
+        .select("*")
+        .eq("estado", "pendiente");
+
+      tabla.innerHTML = "";
+
+      if (error) {
+        console.error("Error cargando solicitudes:", error);
+        tabla.innerHTML = `<tr><td colspan="4" class="empty">Error al cargar solicitudes</td></tr>`;
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        tabla.innerHTML = `<tr><td colspan="4" class="empty">No hay solicitudes pendientes</td></tr>`;
+        return;
+      }
+
+      data.forEach(s => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${s.nombre}</td>
+          <td>${s.correo}</td>
+          <td>${s.contrasena}</td>
+          <td>
+            <button class="aprobar" onclick="aprobar(${s.id})">Aprobar</button>
+            <button class="rechazar" onclick="rechazar(${s.id})">Rechazar</button>
+          </td>
+        `;
+        tabla.appendChild(row);
+      });
+    }
+
+    // 🔹 Aprobar solicitud
+    window.aprobar = async (id) => {
+      const { error } = await supabase
+        .from("solicitudes_registro")
+        .update({ estado: "aprobado" })
+        .eq("id", id);
+
+      if (error) {
+        console.error("Error al aprobar:", error);
+        alert("❌ Error al aprobar la solicitud.");
+        return;
+      }
+
+      alert("✅ Solicitud aprobada y usuario creado automáticamente.");
+      cargarSolicitudes();
+    };
+
+    // 🔹 Rechazar solicitud
+    window.rechazar = async (id) => {
+      const { error } = await supabase
+        .from("solicitudes_registro")
+        .update({ estado: "rechazado" })
+        .eq("id", id);
+
+      if (error) {
+        console.error("Error al rechazar:", error);
+        alert("❌ Error al rechazar la solicitud.");
+        return;
+      }
+
+      alert("🚫 Solicitud rechazada.");
+      cargarSolicitudes();
+    };
+
+    // 🔹 Cargar solicitudes al inicio
+    cargarSolicitudes();
+  </script>
 
 </body>
 </html>

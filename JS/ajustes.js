@@ -1,57 +1,121 @@
-// ================================================
-//  AJUSTES — PROGRAMACIÓN DE HORARIOS
-// ================================================
+// ==================================================
+//  AJUSTES — PROGRAMACIÓN DE HORARIOS (FRONTEND)
+// ==================================================
 
+// Guarda todas las programaciones activas
+const programaciones = [];
+
+// Recorre todas las tarjetas
 document.querySelectorAll(".guardar-btn").forEach(btn => {
-  btn.addEventListener("click", async () => {
+  btn.addEventListener("click", () => {
 
-    // Obtener la tarjeta donde se hizo clic
+    // Tarjeta actual
     const card = btn.closest(".card");
+
+    // Dispositivo asociado a la tarjeta (1,2,3...)
     const device = card.getAttribute("data-device");
 
-    // Obtener hora
+    // Hora seleccionada
     const time = card.querySelector(".time-input").value;
 
-    // Obtener modo (Prender / Apagar según el toggle)
+    // Toggle (solo informativo)
     const toggle = card.querySelector(".toggle-mode");
-    const action = toggle.checked ? "on" : "off";
+    const action = toggle && toggle.checked ? "on" : "off";
 
-    // Validar que se eligió una hora
+    // Validación
     if (!time) {
       alert("Selecciona una hora primero");
       return;
     }
 
-    // Crear comando JSON
-    const command = {
-      device: device,
-      action: action,
-      time: time
+    // Guardar programación
+    const tarea = {
+      device,
+      time,
+      action,
+      ejecutado: false
     };
 
-    console.log("Enviando:", command);
+    programaciones.push(tarea);
 
-    // =======================================================
-    //  ENVÍO AL ARDUINO / ESP32 POR WEB SERIAL (si está activo)
-    // =======================================================
-    try {
-      const port = await navigator.serial.requestPort();
-      await port.open({ baudRate: 9600 });
-
-      const writer = port.writable.getWriter();
-      await writer.write(new TextEncoder().encode(JSON.stringify(command) + "\n"));
-      writer.releaseLock();
-
-      // Mensaje al usuario
-      alert("Hora programada con éxito");
-
-    } catch (err) {
-      console.error(err);
-      alert("No se pudo enviar al dispositivo. Verifica el USB.");
-    }
-
+    console.log("Horario programado:", tarea);
+    alert(`Horario guardado para el dispositivo ${device}`);
   });
 });
 
-// ================================================
-// ESPACIO RESERVADO PARA FUTURAS VALIDACIONES
+// ==================================================
+//  REVISIÓN CONSTANTE DE LA HORA (RELOJ)
+// ==================================================
+setInterval(() => {
+  const now = new Date();
+  const horaActual =
+    now.getHours().toString().padStart(2, "0") +
+    ":" +
+    now.getMinutes().toString().padStart(2, "0");
+
+  programaciones.forEach(tarea => {
+    if (!tarea.ejecutado && tarea.time === horaActual) {
+
+      console.log(`Ejecutando /cmd/${tarea.device}`);
+
+      // ============================================
+      // MISMA LÓGICA QUE inicio.js
+      // ============================================
+      fetch(`http://localhost:3001/cmd/${tarea.device}`)
+        .then(res => res.text())
+        .then(r => console.log("Arduino:", r))
+        .catch(err => console.error("Error:", err));
+
+      tarea.ejecutado = true; // evita repetir
+    }
+  });
+
+}, 1000); // revisa cada segundo
+
+// ===== MOSTRAR / OCULTAR PANEL DE HORA =====
+document.querySelectorAll(".action-select").forEach(select => {
+  select.addEventListener("change", () => {
+    const card = select.closest(".card");
+    const panelHora = card.querySelector(".time-panel");
+
+    if (select.value === "") {
+      panelHora.style.display = "none";
+    } else {
+      panelHora.style.display = "block";
+    }
+  });
+});
+
+// ===== GUARDAR PROGRAMACIÓN =====
+document.querySelectorAll(".guardar-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    const card = btn.closest(".card");
+    const device = card.dataset.device;
+    const accion = card.querySelector(".action-select").value;
+    const hora = card.querySelector(".time-input").value;
+    const status = card.querySelector(".status");
+
+    if (!accion) {
+      status.textContent = "Selecciona encender o apagar";
+      return;
+    }
+
+    if (!hora) {
+      status.textContent = "Selecciona una hora";
+      return;
+    }
+
+    // Guardado local (lógica web)
+    const programacion = {
+      device,
+      accion,
+      hora
+    };
+
+    localStorage.setItem(`horario-${device}`, JSON.stringify(programacion));
+
+    status.textContent = `Programado para ${accion} a las ${hora}`;
+  });
+});
+
